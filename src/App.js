@@ -10,6 +10,8 @@ import About from './Container/About/About';
 import Contact from './Container/Contact/Contact';
 import Appointment from './Container/Appointment/Appointment';
 import Login from './Container/Login/Login';
+import Form_1 from './Container/Forms/Form';
+
 
 
 
@@ -25,6 +27,7 @@ function App() {
         <Route exact path={"/contact"} component={Contact}/>
         <Route exact path={"/appointment"} component={Appointment}/>
         <Route exact path={"/login"} component={Login}/>
+        <Route exact path={"/form"} component={Form_1}/>
       </switch>
       <Footer />
     </>
