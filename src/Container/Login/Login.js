@@ -53,8 +53,11 @@ function Login(props) {
 
             if (useType === "Login") {
                 console.log("Successfully Login");
+                sessionStorage.setItem("user","123456")
+
             } else if (useType === "SignUp") {
                 console.log("Successfully SignUp");
+
             } else if (useType === "forgetPassowrd") {
                 console.log("Successfully Forget Passowrd");
             }
