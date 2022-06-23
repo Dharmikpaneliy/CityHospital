@@ -96,7 +96,7 @@ function Contact(props) {
                                         <textarea className="form-control" name="message" rows={5} placeholder="Message" onChange={formik.handleChange} defaultValue={""} />
 
                                     </div>
-                                    <div className="text-center"><Button type="submit" onClick={() => setuserform("Form")}>Send Message</Button></div>
+                                    <div className="text-center my-3"><Button type="submit" onClick={() => setuserform("Form")}>Send Message</Button></div>
                                 </Form>
                             </Formik>
                         </div>
