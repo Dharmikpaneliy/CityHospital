@@ -39,11 +39,11 @@ function Appointment(props) {
             localdata.push(iData);
             localStorage.setItem("appointment", JSON.stringify(localdata));
         }
+        handleInsert();
     }
 
     const handleupdateData = (values) => {
         let localdata = JSON.parse(localStorage.getItem("appointment"));
-
         let uData = localdata.map((l) => {
             if (l.id === values.id) {
                 return values
@@ -56,7 +56,6 @@ function Appointment(props) {
         setUpdate(false);
         formik.resetForm();
         history.push("/listappointment");
-        console.log(uData);
     }
 
 
@@ -91,10 +90,12 @@ function Appointment(props) {
             if (localdata !== null && props.location.state) {
                 let fData = localdata.filter((l) => l.id === props.location.state.id)
                 formik.setValues(fData[0])
+                setUpdate(true);
+                history.replace()
             }
-            setUpdate(true);
+            
         },
-        [])
+        []);
 
 
     const { handleChange, errors, handleBlur, touched, values} = formik

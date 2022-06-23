@@ -43,10 +43,6 @@ function ListAppointment(props) {
         },
     }));
 
-    function createData(name, email, phone, date, department, message) {
-        return { name, email, phone, date, department, message};
-    }
-
     const handleDelete = (id) => {
         let localData = JSON.parse(localStorage.getItem("appointment"));
 
