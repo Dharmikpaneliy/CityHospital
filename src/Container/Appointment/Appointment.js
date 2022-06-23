@@ -44,6 +44,7 @@ function Appointment(props) {
 
     const handleupdateData = (values) => {
         let localdata = JSON.parse(localStorage.getItem("appointment"));
+            
         let uData = localdata.map((l) => {
             if (l.id === values.id) {
                 return values
