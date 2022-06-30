@@ -13,22 +13,31 @@ import PublicRoute from './Container/Route/PublicRoute';
 import PrivateRoute from './Container/Route/PrivateRoute';
 import { Switch } from 'react-router-dom';
 import ListAppointment from './Container/Appointment/ListAppointment';
+import { Provider } from 'react-redux';
+import Counter from './Container/Counter/Counter';
+import { configureStore } from './redux/Store';
 
 function App() {
+
+  let store = configureStore();
+   
   return (
-    <>  
+    <>
       <Header />
-      <Switch>
-        <PublicRoute exact path={"/"} component={Home}/>
-        <PublicRoute exact path={"/department"} component={Department}/>
-        <PrivateRoute exact path={"/doctors"} component={Doctors}/>
-        <PublicRoute exact path={"/about"} component={About}/>
-        <PrivateRoute exact path={"/contact"} component={Contact}/>
-        <PrivateRoute exact path={"/appointment"} component={Appointment}/>
-        <PublicRoute exact path={"/listappointment"} component={ListAppointment} />
-        <PublicRoute restricted={true} exact path={"/login"} component={Login}/>
-        <PublicRoute  exact path={"/form"} component={Form_1}/>
-      </Switch>
+      <Provider store={store}>
+        <Switch>
+          <PublicRoute exact path={"/"} component={Home} />
+          <PublicRoute exact path={"/department"} component={Department} />
+          <PrivateRoute exact path={"/doctors"} component={Doctors} />
+          <PublicRoute exact path={"/about"} component={About} />
+          <PrivateRoute exact path={"/contact"} component={Contact} />
+          <PrivateRoute exact path={"/appointment"} component={Appointment} />
+          <PublicRoute exact path={"/listappointment"} component={ListAppointment} />
+          <PublicRoute restricted={true} exact path={"/login"} component={Login} />
+          <PublicRoute exact path={"/form"} component={Form_1} />
+          <PublicRoute exact path={"/counter"} component={Counter}/>
+        </Switch>
+      </Provider>
       <Footer />
     </>
   );
