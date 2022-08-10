@@ -1,7 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Alert from '../Alert/Alert';
 
 function Header(props) {
+
+    const auth = useSelector(state => state.auth)
+
+    console.log(auth);
+
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -58,9 +65,16 @@ function Header(props) {
                     {/* <a href="#" className="appointment-btn scrollto">   
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </a> */}
-                    <NavLink className="appointment-btn scrollto" to={"/login"}><span className="d-none d-md-inline">Login/Signup</span></NavLink>
+                    {
+                        auth.user === null?
+                        <NavLink className="appointment-btn scrollto" to={"/login"}><span className="d-none d-md-inline">Login/Signup</span></NavLink>
+                        :
+                        <NavLink className="appointment-btn scrollto" to={"/login"}><span className="d-none d-md-inline">Logout</span></NavLink>
+                    }
                     <NavLink className="appointment-btn scrollto" to={"/form"}><span className="d-none d-md-inline">Form</span></NavLink>
                     <NavLink className="appointment-btn scrollto" to={"/counter"}><span className="d-none d-md-inline">Counter</span></NavLink>
+
+                    <Alert/>
                 </div>
             </header>
         </div>

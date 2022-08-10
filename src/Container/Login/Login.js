@@ -2,9 +2,13 @@ import { Form, Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
+import { LoginUser, SignupUser } from '../../redux/Action/auth.action';
+import { useDispatch } from 'react-redux'
 
 function Login(props) {
     const [useType, setUseType] = useState("Login");
+
+    const dispatch = useDispatch();
 
     let Login = {
         email: yup.string().email("please enter valid email").required("please enter email"),
@@ -12,7 +16,7 @@ function Login(props) {
     }
 
     let SignUp = {
-        name: yup.string().required("please Enter Name"),
+        // name: yup.string().required("please Enter Name"),
         email: yup.string().email("please enter valid email").required("please enter email"),
         password: yup.string().required("please enter Password"),
     }
@@ -33,7 +37,7 @@ function Login(props) {
     } else if (useType === "SignUp") {
         schema = yup.object().shape(SignUp);
         initiValue = {
-            name: "",
+            // name: "",
             email: "",
             password: ""
         }
@@ -50,13 +54,18 @@ function Login(props) {
         initialValues: initiValue,
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
+            console.log(values);
 
             if (useType === "Login") {
                 console.log("Successfully Login");
-                sessionStorage.setItem("user","123456")
+                // sessionStorage.setItem("user","123456")
+
+                dispatch(LoginUser(values))
 
             } else if (useType === "SignUp") {
                 console.log("Successfully SignUp");
+
+                dispatch(SignupUser(values))
 
             } else if (useType === "forgetPassowrd") {
                 console.log("Successfully Forget Passowrd");
@@ -65,7 +74,7 @@ function Login(props) {
         },
     });
 
-    console.log(formik.errors.email);
+    // console.log(formik.errors.email);
 
     return (
         <main id="main">
@@ -102,21 +111,22 @@ function Login(props) {
                                 }
                                 {
                                     useType === "SignUp" ?
-                                        <FormGroup>
-                                            <Label for="exampleEmail">
-                                                Name
-                                            </Label>
-                                            <Input
-                                                name="name"
-                                                placeholder="Enter Name"
-                                                type="text"
-                                                onChange={formik.handleChange}
-                                            />
-                                            {
-                                                formik.errors.name ?
-                                                    <p>{formik.errors.name}</p> : null
-                                            }
-                                        </FormGroup> :
+                                        // <FormGroup>
+                                        //     <Label for="exampleEmail">
+                                        //         Name
+                                        //     </Label>
+                                        //     <Input
+                                        //         name="name"
+                                        //         placeholder="Enter Name"
+                                        //         type="text"
+                                        //         onChange={formik.handleChange}
+                                        //     />
+                                        //     {
+                                        //         formik.errors.name ?
+                                        //             <p>{formik.errors.name}</p> : null
+                                        //     }
+                                        // </FormGroup>
+                                        <></> :
                                         null
                                 }
                                 {
@@ -156,6 +166,8 @@ function Login(props) {
                                         </FormGroup>
                                     </>
                                 }
+
+                                
                                 {
                                     useType === "Login" ?
                                         <div className="text-center">
