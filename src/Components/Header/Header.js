@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Logout } from '../../redux/Action/auth.action';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
@@ -8,6 +9,12 @@ function Header(props) {
     const auth = useSelector(state => state.auth)
 
     console.log(auth);
+
+    const dispatch = useDispatch()
+
+    const handlelogin = () => {
+        dispatch(Logout())
+    }
 
     return (
         <div className="main-header">
@@ -58,18 +65,13 @@ function Header(props) {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    {/* <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-                        Appointment</a> */}
                     <NavLink  className="appointment-btn scrollto" to={"/appointment"}><span className="d-none d-md-inline">Make an</span>
                         Appointment</NavLink>
-                    {/* <a href="#" className="appointment-btn scrollto">   
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </a> */}
                     {
                         auth.user === null?
                         <NavLink className="appointment-btn scrollto" to={"/login"}><span className="d-none d-md-inline">Login/Signup</span></NavLink>
                         :
-                        <NavLink className="appointment-btn scrollto" to={"/login"}><span className="d-none d-md-inline">Logout</span></NavLink>
+                        <NavLink onClick={() => handlelogin()} className="appointment-btn scrollto" to={"/login"}><span className="d-none d-md-inline">Logout</span></NavLink>
                     }
                     <NavLink className="appointment-btn scrollto" to={"/form"}><span className="d-none d-md-inline">Form</span></NavLink>
                     <NavLink className="appointment-btn scrollto" to={"/counter"}><span className="d-none d-md-inline">Counter</span></NavLink>
