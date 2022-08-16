@@ -7,6 +7,8 @@ export const LOGIN_FORM = "LOGIN_FORM"
 export const LOGED_FORM = "LOGED_FORM"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const LOGGEDOUT_USER = "LOGGEDOUT_USER"
+export const GOOGLE_LOGIN  = "GOOGLE_LOGIN"
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
 
 export const SET_ALERT = "SET_ALERT"
 export const RESET_ALERT = "RESET_ALERT"

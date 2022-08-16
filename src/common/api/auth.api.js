@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -56,7 +56,6 @@ export const signupApi = (data) => {
 }
 
 export const loginApi = (data) => {
-    console.log(data);
     return new Promise((resolve, reject) => {
 
         signInWithEmailAndPassword(auth, data.email, data.password)
@@ -87,14 +86,34 @@ export const loginApi = (data) => {
     })
 }
 
+export const googleLoginAPI = () => {
+    return new Promise((resolve, reject) => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                resolve({payload: user})
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                reject({payload : errorCode})
+            });
+    })
+}
+
 export const logoutAPI = () => {
     return new Promise((resolve, reject) => {
         signOut(auth)
             .then((user) => {
-                resolve({payload: "LogOut Successfully"});
+                resolve({ payload: "LogOut Successfully" });
             })
             .catch((error) => {
-                reject({payload: "Something Went Wrong"});
+                reject({ payload: "Something Went Wrong" });
             })
     })
 }

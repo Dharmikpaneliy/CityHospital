@@ -2,8 +2,9 @@ import { Form, Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
-import { LoginUser, SignupUser } from '../../redux/Action/auth.action';
+import { googleLogin, LoginUser, SignupUser } from '../../redux/Action/auth.action';
 import { useDispatch } from 'react-redux'
+import GoogleIcon from '@mui/icons-material/Google';
 
 function Login(props) {
     const [useType, setUseType] = useState("Login");
@@ -46,6 +47,10 @@ function Login(props) {
         initiValue = {
             email: ""
         }
+    }
+
+    const signinwithgoogle = () => {
+        dispatch(googleLogin())
     }
 
     // const schema = yup.object().shape(Login);
@@ -167,7 +172,7 @@ function Login(props) {
                                     </>
                                 }
 
-                                
+
                                 {
                                     useType === "Login" ?
                                         <div className="text-center">
@@ -181,12 +186,18 @@ function Login(props) {
                                         <div className="text-center">
                                             <Button type='submit' className="appointment-btn scrollto m-0">
                                                 {
-                                                    useType === 'forgetPassowrd' ? "Send OPT" : "Sign Up"
+                                                    useType === 'forgetPassowrd' ? "Submit" : "Sign Up"
                                                 }</Button>
                                             <Button type='submit' className="appointment-btn scrollto m-0"
-                                                onClick={() => setUseType("Login")}>Login</Button>
+                                                onClick={() => setUseType("Login")}>Login
+                                            </Button>
                                         </div>
                                 }
+                                <div className="text-center m-3">
+                                    <Button type='submit' className="appointment-btn scrollto m-0"
+                                        onClick={() => signinwithgoogle()}><GoogleIcon className='m-1'></GoogleIcon>Sign in With Google
+                                    </Button>
+                                </div>
                             </Form>
                         </Formik>
                     </div>
