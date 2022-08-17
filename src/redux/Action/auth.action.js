@@ -20,6 +20,10 @@ export const Logout = () => (dispatch) => {
     dispatch({type : ActionTypes.LOGOUT_USER})
 }
 
+export const forgotpassword = (data) => (dispatch) => {
+    dispatch({type : ActionTypes.FORGOT_PASSWORD, payload : data    })
+}
+
 export const Loggedout = () => (dispatch) => {
     dispatch({type : ActionTypes.LOGGEDOUT_USER})
 }

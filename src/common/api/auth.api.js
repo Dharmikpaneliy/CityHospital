@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -103,6 +103,21 @@ export const googleLoginAPI = () => {
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 reject({payload : errorCode})
             });
+    })
+}
+
+export const forgotPasswordAPI = (data) => {
+
+    // console.log(data);
+    return new Promise((resolve, reject) => {
+        sendPasswordResetEmail(auth, data.email)
+        .then((user) => {
+            resolve({payload: "Please Check Your Register Email"})
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            reject({payload: errorCode})
+        })
     })
 }
 

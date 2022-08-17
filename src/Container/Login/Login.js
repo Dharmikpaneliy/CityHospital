@@ -2,7 +2,7 @@ import { Form, Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
-import { googleLogin, LoginUser, SignupUser } from '../../redux/Action/auth.action';
+import { forgotpassword, googleLogin, LoginUser, SignupUser } from '../../redux/Action/auth.action';
 import { useDispatch } from 'react-redux'
 import GoogleIcon from '@mui/icons-material/Google';
 
@@ -74,6 +74,7 @@ function Login(props) {
 
             } else if (useType === "forgetPassowrd") {
                 console.log("Successfully Forget Passowrd");
+                dispatch(forgotpassword(values))
             }
             resetForm()
         },
